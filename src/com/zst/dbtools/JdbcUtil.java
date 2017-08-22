@@ -105,7 +105,7 @@ public class JdbcUtil {
 	 * @return ¼ÇÂ¼×ÜÊý
 	 */
 	public static Integer getDataCountBySQL(Connection conn, String sql, Object[] args) {
-		StringBuffer sqlCount = new StringBuffer(sql.length() + 300);
+		StringBuilder sqlCount = new StringBuilder(sql.length() + 300);
 		sqlCount.append("select count(*) from ( ");
 		int indexOf = sql.toLowerCase().lastIndexOf(" order by");
 		if (indexOf > -1) {
@@ -156,7 +156,7 @@ public class JdbcUtil {
 				values.add(arg);
 			}
 		}
-		StringBuffer pagingSelect = new StringBuffer(sql.length() + 300);
+		StringBuilder pagingSelect = new StringBuilder(sql.length() + 300);
 		if (firstResult > 0) {
 			pagingSelect.append("select * from ( select row_.*, rownum rownum_ from ( ");
 		} else {

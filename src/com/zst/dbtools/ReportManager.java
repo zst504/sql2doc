@@ -23,12 +23,15 @@ public class ReportManager {
 	
 	private Connection con = null;
 	
+	private String dbName = "";
+	
 	/**
 	 * 数据库表信息导出成word文档
 	 * @return
 	 * @throws Exception
 	 */
 	public String exportReport() throws Exception{
+		dbName = PropertiesUtil.get("database.name", null);
 		//查询sql，需要导出的表信息
 		String sql = "SELECT"
 				  + " column_name,"
@@ -40,7 +43,7 @@ public class ReportManager {
 				  + " table_name"
 				+ " FROM"
 				  + " INFORMATION_SCHEMA.Columns"
-				+ " WHERE table_schema = 'roam'";
+				+ " WHERE table_schema = '" + dbName + "'";
 		con = db.getConnection();
 		List[] rm = jdbc.getDataListBySQL(con, sql, null);
 		List<Map> columns = null;

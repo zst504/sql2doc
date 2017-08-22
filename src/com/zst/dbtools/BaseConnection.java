@@ -8,14 +8,21 @@ import java.sql.*;
 public class BaseConnection{
 	private final Logger log = Logger.getLogger(this.getClass());
     public Connection conn;
+    private String dbUrl = "";
+    private String userName = "";
+    private String pwd = "";
 
-
+    public BaseConnection() {
+    	dbUrl = PropertiesUtil.get("mysql.jdbcUrl",null);
+    	userName = PropertiesUtil.get("mysql.userName",null);
+    	pwd = PropertiesUtil.get("mysql.passWord",null);
+    }
 
 
 	public Connection getConnection() throws Exception{
         try {
         	Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/roam?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull","root","123456");   
+            conn = DriverManager.getConnection(dbUrl, userName, pwd);   
             return conn;
         }catch (Exception e){
             e.printStackTrace();
