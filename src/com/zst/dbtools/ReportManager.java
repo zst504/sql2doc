@@ -84,11 +84,11 @@ public class ReportManager {
 			String path = (new File("res")).getAbsolutePath();
 			try {  
 				configuration.setDirectoryForTemplateLoading(new File(path));//FTL文件所存在的位置  
-				t = configuration.getTemplate("AirGo平台数据库表结构.ftl","UTF-8"); //根据路径和文件名加载模板  
+				t = configuration.getTemplate("数据库表结构.ftl","UTF-8"); //根据路径和文件名加载模板  
 			} catch (IOException e) {  
 				e.printStackTrace();  
 			}  
-			File outFile = new File(path+"/AirGo平台数据库表结构"+Math.random()*10000+".doc");  //生成word文档名称及存放路径
+			File outFile = new File(path+"/数据库表结构"+Math.random()*10000+".doc");  //生成word文档名称及存放路径
 			Writer out = null;  
 			try {  
 				out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile),"UTF-8"));  
