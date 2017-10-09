@@ -31,7 +31,7 @@ public class ReportManager {
 	 * @throws Exception
 	 */
 	public String exportReport() throws Exception{
-		dbName = PropertiesUtil.get("database.name", null);
+		dbName = PropertiesUtil.loadProperty("init.properties", "database.name");
 		//查询sql，需要导出的表信息
 		String sql = "SELECT"
 				  + " column_name,"

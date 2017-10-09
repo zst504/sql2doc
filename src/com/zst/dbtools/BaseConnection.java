@@ -13,9 +13,9 @@ public class BaseConnection{
     private String pwd = "";
 
     public BaseConnection() {
-    	dbUrl = PropertiesUtil.get("mysql.jdbcUrl",null);
-    	userName = PropertiesUtil.get("mysql.userName",null);
-    	pwd = PropertiesUtil.get("mysql.passWord",null);
+    	dbUrl = PropertiesUtil.loadProperty("init.properties", "mysql.jdbcUrl");
+    	userName = PropertiesUtil.loadProperty("init.properties", "mysql.userName");
+    	pwd = PropertiesUtil.loadProperty("init.properties", "mysql.passWord");
     }
 
 
