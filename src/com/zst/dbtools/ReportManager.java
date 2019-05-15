@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,9 @@ public class ReportManager {
 	 * @throws Exception
 	 */
 	public String exportReport() throws Exception{
-		dbName = PropertiesUtil.loadProperty("init.properties", "database.name");
+		String dbUrl = PropertiesUtil.loadProperty("init.properties", "mysql.jdbcUrl");
+		
+		dbName = dbUrl.substring(dbUrl.lastIndexOf("/") + 1, dbUrl.indexOf("?"));
 		//查询sql，需要导出的表信息
 		String sql = "SELECT"
 				  + " column_name,"
@@ -88,7 +91,7 @@ public class ReportManager {
 			} catch (IOException e) {  
 				e.printStackTrace();  
 			}  
-			File outFile = new File(path+"/数据库表结构"+Math.random()*10000+".doc");  //生成word文档名称及存放路径
+			File outFile = new File(path + "/" + dbName + "数据库表结构" + new Date().getTime() + ".doc");  //生成word文档名称及存放路径
 			Writer out = null;  
 			try {  
 				out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile),"UTF-8"));  
